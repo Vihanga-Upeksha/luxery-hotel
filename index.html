@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Villa - Luxury Hotel Experience</title>
+    <meta name="description"
+        content="Experience unmatched luxury at The Villa. Premium rooms, exquisite dining, and world-class amenities. Book your stay today.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/room-facility.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">The <span>Villa</span></div>
+        <div class="mobile-toggle"><i class="fas fa-bars"></i></div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="rooms.php">Rooms & Suites</a></li>
+                <li><a href="facilities.html">Facilities</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="booking/index.php" class="btn btn-primary">Book Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section with Video Background -->
+    <section class="hero-video">
+        <video autoplay muted loop playsinline class="back-video">
+            <source src="video/vecteezy_luxurious-hotel-lobby-with-chandeliers_47658476.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-content">
+            <h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Welcome to The Villa</h1>
+            <p style="color: white; font-size: 1.5rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">Experience the Epitome
+                of Luxury</p>
+            <a href="booking/index.php" class="btn btn-primary" style="margin-top: 1rem;">Check Availability</a>
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="intro text-center">
+        <div class="section-header">
+            <span class="subtitle">Welcome to The Villa</span>
+            <h2>A Sanctuary for the Soul</h2>
+        </div>
+        <p style="max-width: 800px; margin: 0 auto; color: var(--color-text-light);">
+            Nestled in the heart of the city yet miles away from the ordinary, The Villa offers a unique blend of
+            sophisticated style and warm hospitality. Whether you're here for business or leisure, our dedicated team
+            ensures your stay is nothing short of exceptional.
+        </p>
+    </section>
+
+    <!-- Curated Experiences (New Section 1) -->
+    <section class="experiences-section">
+        <div class="section-header">
+            <span class="subtitle">Discover Sri Lanka</span>
+            <h2>Curated Experiences</h2>
+        </div>
+        <div class="experiences-grid">
+            <div class="experience-card">
+                <img src="https://loremflickr.com/600/800/tea,plantation,srilanka?random=30" alt="Tea Trails">
+                <div class="experience-overlay">
+                    <h3>Ceylon Tea Trails</h3>
+                    <p>Explore the lush green hills and historic tea factories of the central highlands.</p>
+                </div>
+            </div>
+            <div class="experience-card">
+                <img src="https://loremflickr.com/600/800/elephant,safari,srilanka?random=31" alt="Wildlife Safari">
+                <div class="experience-overlay">
+                    <h3>Wildlife Safari</h3>
+                    <p>Witness the majestic elephants and leopards in Yala and Udawalawe National Parks.</p>
+                </div>
+            </div>
+            <div class="experience-card">
+                <img src="https://loremflickr.com/600/800/beach,sunset,srilanka?random=32" alt="Coastal Bliss">
+                <div class="experience-overlay">
+                    <h3>Coastal Bliss</h3>
+                    <p>Unwind on the pristine golden beaches of the southern coast, just minutes away.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Rooms -->
+    <section class="featured-rooms">
+        <div class="section-header">
+            <span class="subtitle">Accommodations</span>
+            <h2>Our Luxurious Rooms</h2>
+        </div>
+        <div class="room-grid" id="featured-rooms-container">
+            <!-- Dynamically loaded from rooms.php -->
+            <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #999;">
+                <i class="fas fa-spinner fa-spin"></i> Loading rooms...
+            </div>
+        </div>
+        <div class="text-center" style="margin-top: var(--spacing-md);">
+            <a href="rooms.php" class="btn btn-primary">View All Rooms</a>
+        </div>
+    </section>
+
+    <!-- Script to Load Featured Rooms Dynamically -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('rooms.php?featured=1')
+                .then(response => response.text())
+                .then(html => {
+                    const container = document.getElementById('featured-rooms-container');
+                    // Parse the response to extract room cards
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const roomCards = doc.querySelectorAll('.room-card');
+                    
+                    if (roomCards.length > 0) {
+                        // Limit to first 3 cards for featured section
+                        let cardsHTML = '';
+                        for (let i = 0; i < Math.min(3, roomCards.length); i++) {
+                            cardsHTML += roomCards[i].outerHTML;
+                        }
+                        container.innerHTML = cardsHTML;
+                    } else {
+                        container.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #999;"><p>No rooms available at this time.</p></div>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading rooms:', error);
+                    const container = document.getElementById('featured-rooms-container');
+                    container.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #d32f2f;"><p>Error loading rooms. Please try again later.</p></div>';
+                });
+        });
+    </script>
+
+    <!-- Exclusive Offers (New Section 3) -->
+    <section class="offers-section">
+        <div class="section-header">
+            <span class="subtitle">Special Packages</span>
+            <h2>Exclusive Offers</h2>
+        </div>
+        <div class="offers-grid">
+            <div class="offer-card">
+                <div class="offer-img">
+                    <img src="https://loremflickr.com/600/400/couple,romantic,dinner?random=33" alt="Honeymoon">
+                </div>
+                <div class="offer-content">
+                    <span class="offer-badge">Limited Time</span>
+                    <h3>Honeymoon Bliss</h3>
+                    <p>Enjoy a romantic getaway with a complimentary candlelit dinner, spa treatment for two, and late
+                        check-out.</p>
+                    <a href="booking/index.php"
+                        style="margin-top: 1rem; color: var(--color-secondary); font-weight: 700;">View Details <i
+                            class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="offer-card">
+                <div class="offer-img">
+                    <img src="https://loremflickr.com/600/400/breakfast,luxury?random=34" alt="Early Bird">
+                </div>
+                <div class="offer-content">
+                    <span class="offer-badge">Save 20%</span>
+                    <h3>Early Bird Special</h3>
+                    <p>Book your stay at least 30 days in advance and enjoy a 20% discount on all room categories.</p>
+                    <a href="booking/index.php"
+                        style="margin-top: 1rem; color: var(--color-secondary); font-weight: 700;">View Details <i
+                            class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guest Reviews (New Section 2) -->
+    <section class="reviews-section">
+        <div class="section-header">
+            <span class="subtitle" style="color: var(--color-secondary);">Testimonials</span>
+            <h2>What Our Guests Say</h2>
+        </div>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <i class="fas fa-quote-left"></i>
+                <p class="review-text">"An absolute paradise! The service was impeccable, and the ocean view from our
+                    room was breathtaking. We will definitely be back."</p>
+                <p class="review-author">- Sarah & David, UK</p>
+            </div>
+            <div class="review-card">
+                <i class="fas fa-quote-left"></i>
+                <p class="review-text">"The highlight of our Sri Lanka trip. The food at Azure was world-class, and the
+                    staff made us feel like royalty. Highly recommended!"</p>
+                <p class="review-author">- Michael Chang, Singapore</p>
+            </div>
+            <div class="review-card">
+                <i class="fas fa-quote-left"></i>
+                <p class="review-text">"From the infinity pool to the spacious suites, everything was perfect. A truly
+                    luxurious experience in the heart of Colombo."</p>
+                <p class="review-author">- Emily Blunt, Australia</p>
+            </div>
+        </div>
+        <div class="text-center" style="margin-top: 3rem;">
+            <a href="gallery.html" class="btn btn-primary"
+                style="background: transparent; border: 2px solid white;">View Gallery</a>
+        </div>
+    </section>
+
+    <!-- Facilities Teaser -->
+    <section class="facilities-teaser bg-white">
+        <div class="section-header">
+            <span class="subtitle">Amenities</span>
+            <h2>World-Class Services</h2>
+        </div>
+        <div class="facilities-grid">
+            <div class="facility-item">
+                <i class="fas fa-spa facility-icon"></i>
+                <h3>Luxury Spa</h3>
+                <p>Rejuvenate your senses with our exclusive spa treatments.</p>
+            </div>
+            <div class="facility-item">
+                <i class="fas fa-utensils facility-icon"></i>
+                <h3>Fine Dining</h3>
+                <p>Savor exquisite culinary delights prepared by top chefs.</p>
+            </div>
+            <div class="facility-item">
+                <i class="fas fa-swimming-pool facility-icon"></i>
+                <h3>Infinity Pool</h3>
+                <p>Relax by our skyline pool with panoramic city views.</p>
+            </div>
+            <div class="facility-item">
+                <i class="fas fa-dumbbell facility-icon"></i>
+                <h3>Fitness Center</h3>
+                <p>Stay active with our state-of-the-art gym equipment.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <div class="logo">The <span>Villa</span></div>
+                <p style="margin-top: 1rem; color: #ccc;">Experience the art of hospitality. Your luxury escape awaits.
+                </p>
+                <div class="social-icons" style="margin-top: 1rem;">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="rooms.html">Rooms & Suites</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Facilities</h4>
+                <ul class="footer-links">
+                    <li><a href="facilities.html#spa">Luxury Spa</a></li>
+                    <li><a href="facilities.html#dining">Fine Dining</a></li>
+                    <li><a href="facilities.html#pool">Infinity Pool</a></li>
+                    <li><a href="facilities.html#fitness">Fitness Center</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Luxury Ave, Paradise City</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> reservations@thevilla.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 The Villa Hotel. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

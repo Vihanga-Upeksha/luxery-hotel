@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | The Villa</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">The <span>Villa</span></div>
+        <div class="mobile-toggle"><i class="fas fa-bars"></i></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="rooms.php">Rooms & Suites</a></li>
+                <li><a href="facilities.html">Facilities</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="booking/index.php" class="btn btn-primary">Book Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-static"
+        style="background-image: url('https://loremflickr.com/1920/1080/art,gallery,luxury?random=53');">
+        <div class="hero-content">
+            <h1>Visual Experience</h1>
+            <p style="color: white; font-size: 1.5rem;">Glimpse into our world of luxury.</p>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="gallery">
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://loremflickr.com/600/400/srilanka,beach?random=20" alt="Gallery Image 1">
+            </div>
+            <div class="gallery-item">
+                <img src="https://loremflickr.com/600/400/srilanka,tea?random=21" alt="Gallery Image 2">
+            </div>
+            <div class="gallery-item">
+                <img src="https://loremflickr.com/600/400/srilanka,hotel,room?random=22" alt="Gallery Image 3">
+            </div>
+            <div class="gallery-item">
+                <img src="https://loremflickr.com/600/400/srilanka,pool?random=23" alt="Gallery Image 4">
+            </div>
+            <div class="gallery-item">
+                <img src="https://loremflickr.com/600/400/srilanka,food?random=24" alt="Gallery Image 5">
+            </div>
+            <div class="gallery-item">
+                <img src="https://loremflickr.com/600/400/srilanka,reception?random=25" alt="Gallery Image 6">
+            </div>
+            <div class="gallery-item">
+                <img src="https://loremflickr.com/600/400/srilanka,sunset?random=26" alt="Gallery Image 7">
+            </div>
+            <div class="gallery-item">
+                <img src="https://loremflickr.com/600/400/srilanka,nature?random=27" alt="Gallery Image 8">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <div class="logo">The <span>Villa</span></div>
+                <p style="margin-top: 1rem; color: #ccc;">Experience the art of hospitality. Your luxury escape awaits.
+                </p>
+                <div class="social-icons" style="margin-top: 1rem;">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="rooms.html">Rooms & Suites</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Facilities</h4>
+                <ul class="footer-links">
+                    <li><a href="facilities.html#spa">Luxury Spa</a></li>
+                    <li><a href="facilities.html#dining">Fine Dining</a></li>
+                    <li><a href="facilities.html#pool">Infinity Pool</a></li>
+                    <li><a href="facilities.html#fitness">Fitness Center</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Luxury Ave, Paradise City</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> reservations@thevilla.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 The Villa Hotel. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
